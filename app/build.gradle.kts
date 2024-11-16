@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.example.googlehealthconnect"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.googlehealthconnect"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,4 +70,5 @@ dependencies {
 
     //Google Health Connect
     implementation("androidx.health.connect:connect-client:1.1.0-alpha10")
+    implementation("com.google.accompanist:accompanist-permissions:0.20.0")
 }

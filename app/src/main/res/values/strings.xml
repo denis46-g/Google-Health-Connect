@@ -1,3 +1,12 @@
 <resources>
+    <string name="get_permissions">Get permissions</string>
     <string name="app_name">GoogleHealthConnect</string>
+    <string name="insert_record">Insert a new record</string>
+    <string name="attention">Attention</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="delete_question">Are you sure you want to delete?</string>
+    <string name="record_add">New record</string>
+    <string name="save_record">Save</string>
+    <string name="back_button">Back</string>
 </resources>
