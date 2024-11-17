@@ -41,13 +41,15 @@ class GoogleHealthConnectRepository(private val context: Context) {
         else
             convertStringToDate(endTimeString)
         try {
+            val s = Instant.ofEpochSecond(startTime)
+            val t = Instant.ofEpochSecond(endTime + 1)
             val response =
                 healthConnectClient.readRecords(
                     ReadRecordsRequest(
                         StepsRecord::class,
                         timeRangeFilter = TimeRangeFilter.between(
-                            Instant.ofEpochSecond(startTime),
-                            Instant.ofEpochSecond(endTime + 1))
+                            s,
+                            t)
                     )
                 )
             for (stepRecord in response.records) {

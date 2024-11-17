@@ -60,7 +60,7 @@ fun PermissionsScreen(
                     }
                 },
                 permissionNotAvailableContent = {
-                    Text("В настройках google health разрешите " + state.permission.split('.').get(3), fontSize = 19.sp)
+                    Text("Allow in GoogleHealth settings " + state.permission.split('.')[3], fontSize = 19.sp)
                 },
                 content = {
                     permises++

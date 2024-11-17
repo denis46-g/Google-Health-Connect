@@ -80,9 +80,24 @@ fun HomeScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    val coroutineScope = rememberCoroutineScope()
+    var key = remember { mutableIntStateOf(0) }
+    var from by rememberSaveable { mutableStateOf("") }
+    //var now = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toEpochSecond()
+    var to by rememberSaveable { mutableStateOf("") }
 
-    Scaffold(
+    var recordsList by remember {mutableStateOf(listOf<StepsRecord>())}
+
+
+    // проверяем, есть ли вообще записи какие-то
+    //val key2 = remember { mutableIntStateOf(0) }
+    var allRecordsList by remember {mutableStateOf(listOf<StepsRecord>())}
+
+    LaunchedEffect(from, to, key.value) {
+        recordsList = repository.readStepsByTimeRange(from, to)
+        allRecordsList = repository.readStepsByTimeRange("", "")
+    }
+
+        Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             GoogleHealthConnectTopAppBar(
@@ -109,19 +124,7 @@ fun HomeScreen(
                     Text(stringResource(R.string.insert_record))
                 }
 
-                var key = remember { mutableIntStateOf(0) }
-                var from by remember { mutableStateOf("") }
-                //var now = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toEpochSecond()
-                var to by remember { mutableStateOf("") }
-
-                var recordsList by remember {mutableStateOf(listOf<StepsRecord>())}
-
-                
-                LaunchedEffect(from, to, key.value) {
-                    recordsList = repository.readStepsByTimeRange(from, to)
-                }
-
-                if(recordsList.isEmpty()){
+                if(allRecordsList.isEmpty()){
                     Text(
                         text = "Oops! No any records. Push a button upper to add",
                         textAlign = TextAlign.Center,
